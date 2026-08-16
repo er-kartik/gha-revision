@@ -1,0 +1,28 @@
+name: Assessment 2 - Inputs and Conditionals
+on:
+    workflow_dispatch:
+        inputs:
+            deploy_target:
+                description: Choose the environment to deploy
+                type: choice
+                options:
+                   - dev
+                   - test
+                   - prod
+                required: true
+                default: dev
+jobs:
+    deploy-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Initial Message
+              run:
+                echo " Starting Deployment process... "   
+            - name: Deployment in Production
+              run:
+                if ${{ inputs.deploy_target }} = "prod" 
+                echo "Deploying to Production"
+            - name: Deployment in non-production
+              run:
+                if ${{ inputs.deploy_target }} != "prod"
+                echo "Deploying to non-production environment"
