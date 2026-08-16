@@ -10,9 +10,9 @@ jobs:
         steps:
             - name: app Version
               id: version_id
-              run: echo "App_Version = 'v0.0.1' "
+              run: echo "App_Version = 'v0.0.1'" >> $GITHUB_OUPUT
         outputs:
-            my-output: ${{steps.version_id.outputs.App_Version}}
+            my-output: ${{ steps.version_id.outputs.App_Version }}
 
     deploy:
         needs: generate_version
