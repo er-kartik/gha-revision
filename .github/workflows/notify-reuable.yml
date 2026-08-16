@@ -1,0 +1,14 @@
+name: Reusable Notify Workflow
+on:
+    workflow_call:
+        inputs:
+            app_name:
+                description: Enter the name of Application
+                type: string
+                required: true
+jobs:
+    send-notification:
+        runs-on: ubuntu-latest
+        steps:
+            - name: notification
+              run: echo "Notification:${{inputs.app_name}} deployment finished!"
