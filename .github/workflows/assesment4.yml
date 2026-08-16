@@ -21,16 +21,16 @@ jobs:
     test:
         runs-on: ubuntu-latest
         needs: build
+        if: inputs.run_tests == true
         steps:
             - name: testing step
-              if: inputs.run_tests == true
               run: echo "Running test"
     
     notify:
         runs-on: ubuntu-latest
         needs: [build, test]
+        if: always()
         steps:
             - name: Notification
-              if: always()
               run:
                 echo "Build status was = ${{ needs.build.outputs.my_output }} "
