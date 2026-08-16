@@ -19,10 +19,9 @@ jobs:
               run:
                 echo " Starting Deployment process... "   
             - name: Deployment in Production
-              run:
-                if ${{ inputs.deploy_target }} = prod 
-                echo "Deploying to Production"
+              if: inputs.deploy_target == 'prod'
+              run: echo "Deploying to Production environment"
+            
             - name: Deployment in non-production
-              run:
-                if ${{ inputs.deploy_target }} != prod
-                echo "Deploying to non-production environment"
+              if: inputs.deploy_target != 'prod'
+              run: echo "Deploying to non-production environment"
