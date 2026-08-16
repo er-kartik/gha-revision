@@ -1,0 +1,36 @@
+name: Assessment 4 - CI Pipepline
+on:
+    workflow_dispatch:
+        inputs:
+            run_tests:
+                description : " input for run test"
+                type: boolean
+                required: true
+                default: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Build Step
+              id: build_id
+              run: echo "build_status=success" >> $GITHUB_OUTPUT
+        outputs:
+            my_output: ${{ steps.build_id.outputs.build_status }}
+
+    test:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: testing step
+              if: inputs.run_tests == true
+              run: echo "Running test"
+    
+    notify:
+        runs-on: ubuntu-latest
+        needs: [build, test]
+        steps:
+            - name: Notification
+              if: always()
+              run:
+                echo "Build status was = ${{ needs.build.outputs.my_output }} "
