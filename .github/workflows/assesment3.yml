@@ -1,0 +1,22 @@
+name: Assessment 3 - Outputs and Job description
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    generate_version:
+        runs-on: ubuntu-latest
+        steps:
+            - name: app Version
+              id: version_id
+              run: echo "App_Version = 'v0.0.1' "
+        outputs:
+            my-output: ${{steps.version_id.outputs.App_Version}}
+
+    deploy:
+        needs: generate_version
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deployment
+              run: echo "Deploying Version ${{ needs.generate_version.outputs.my-output }}"
