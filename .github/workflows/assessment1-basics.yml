@@ -1,11 +1,19 @@
 name: Assessment 1 - Basics
-on: push
+on: 
+    push:
+        branches:
+            - main
 
 jobs:
     basic-job:
         runs-on: ubuntu-latest
         steps:
-            - name: Print the messages and GitHub username
-              run: |
+            - name: Print the initial messages 
+              run:
                 echo "Assessment 1 Started"
-                echo "Github User = ${{ github.actor }}"
+
+            - name: Printing Github Username
+              run: 
+                echo " Github User = ${{ github.actor }}"
+                
+
